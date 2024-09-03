@@ -66,21 +66,21 @@ public class Tasks {
             System.out.printf("\nТрейдер из города %s не найден в списке транзакций.\n", city);
     }
 
-    public static void showAllTransactionsByCity(List<Transaction> transactions, String city) {
-        List<Integer> values = transactions.stream()
+    public static void sumTransactionsByCity(List<Transaction> transactions, String city) {
+        int sum = transactions.stream()
                 .filter(obj -> obj.getTrader().getCity().equals(city))
                 .map(obj -> obj.getValue())
-                .collect(Collectors.toList());
+                .reduce((acc, x) -> acc + x)
+                .orElse(-1);            // если нет транзакций
 
-        System.out.printf("\nСуммы транзакций всех трейдеров из города %s\n", city);
-        values.forEach(System.out::println);
+        System.out.printf("\nСумма транзакций всех трейдеров из города %s = %d\n", city, sum);
     }
 
     public static void showMaxTransaction(List<Transaction> transactions) {
         int max = transactions.stream()
                 .map(obj -> obj.getValue())
                 .max((v1, v2) -> v1.compareTo(v2))
-                .get();
+                .orElse(-1);        // если передали пустой список, то вернуть -1
 
         System.out.printf("\nМаксимальная сумма транзакции = %d\n", max);
     }
@@ -89,7 +89,7 @@ public class Tasks {
         int min = transactions.stream()
                 .map(obj -> obj.getValue())
                 .min((v1, v2) -> v1.compareTo(v2))
-                .get();
+                .orElse(-1);          // если передали пустой список, то вернуть -1
 
         System.out.printf("\nМинимальная сумма транзакции = %d\n", min);
     }

@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class PuttingIntoPractice {
         // 5 пункт задания
         Tasks.checkTraderFrom(transactions, "Milan");
         // 6 пункт задания
-        Tasks.showAllTransactionsByCity(transactions,"Cambridge");
+        Tasks.sumTransactionsByCity(transactions,"Cambridge");
         // 7 пункт задания
         Tasks.showMaxTransaction(transactions);
         // 8 пункт задания
